@@ -58,7 +58,8 @@ pg_isready
 
 > **Screenshot 1:** Take a screenshot showing all three version/status checks.
 >
-> `[insert screenshot]`
+> <img width="1920" height="1020" alt="1" src="https://github.com/user-attachments/assets/2585ea7a-0a99-4fcc-9d72-dabc8fe47532" />
+
 
 ---
 
