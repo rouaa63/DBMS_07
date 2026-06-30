@@ -496,8 +496,9 @@ uv run python3 berechnung.py
 
 > **Screenshot 5:** Take a screenshot showing the colourful table output
 > from `uv run`.
->
-> `[insert screenshot]`
+><img width="654" height="224" alt="5" src="https://github.com/user-attachments/assets/801dcb9a-aa55-4f4d-85b1-d0d4eb73f64b" />
+
+> 
 
 ### Step 5 – Commit
 
