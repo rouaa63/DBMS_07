@@ -112,7 +112,8 @@ Exit the REPL:
 > **Screenshot 2:** Take a screenshot showing all REPL interactions above,
 > including the f-string output.
 >
-> `[insert screenshot]`
+> <img width="1178" height="534" alt="2" src="https://github.com/user-attachments/assets/e3ddb99f-13d0-4592-b6aa-0e9985723f88" />
+
 
 ### Questions for Section 1
 
