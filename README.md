@@ -421,7 +421,8 @@ uv --version
 
 > **Screenshot 4:** Take a screenshot showing the `uv --version` output.
 >
-> `[insert screenshot]`
+> <img width="805" height="464" alt="4 1" src="https://github.com/user-attachments/assets/c624e67c-5e2a-4896-83c6-a1ef2ae3d1f3" />
+
 
 ---
 
