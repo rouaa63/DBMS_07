@@ -294,7 +294,8 @@ Run it directly:
 ./berechnung.py
 ```
 
-> The output should be identical to before.
+> The output should be identical to before.                                                                                           <img width="553" height="227" alt="4" src="https://github.com/user-attachments/assets/549e5aff-42eb-4f7f-9e1d-61c0fd853973" />
+
 
 **What `chmod +x` does:**  
 Every file on a Linux system has three permission bits for each of three
