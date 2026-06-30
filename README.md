@@ -637,8 +637,9 @@ uv run python3 abfrage.py
 > database.
 
 > **Screenshot 6:** Take a screenshot showing the query result table.
->
-> <img width="658" height="252" alt="6" src="https://github.com/user-attachments/assets/c25de4ad-7257-4ba2-9653-996ef184a0c5" />
+> <img width="658" height="252" alt="6" src="https://github.com/user-attachments/assets/46f1ca5c-cbd5-42a0-9be2-764895032dd0" />
+
+> 
 
 
 ### Step 4 – Commit
