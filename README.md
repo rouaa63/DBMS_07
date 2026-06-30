@@ -120,12 +120,12 @@ Exit the REPL:
 **Question 1.1:** In the REPL, typing `2 ** 10` without `print` still shows
 `1024`. Why does this work in the REPL but *not* in a script file?
 
-> *Your answer:*
+> *Your answer:* In the REPL, expressions are automatically evaluated and their result is printed because the interpreter implicitly displays the value of the last expression. In a script file, expressions are not automatically printed; only explicit print() statements produce output.  
 
 **Question 1.2:** The f-string format specifier `:.2f` controls how `price`
 is displayed. What does it mean, and what would `:.4f` produce for `18.9`?
 
-> *Your answer:*
+> *Your answer:*  The format specifier .2f controls floating-point precision by rounding the number to two decimal places. For 18.9, using .4f would display 18.9000.  
 
 ---
 
@@ -169,15 +169,18 @@ Exit the REPL:
 can write `sqrt(144)` without the `math.` prefix. What is the drawback of
 this style compared to `import math`?
 
-> *Your answer:*
+> *Your answer:*   Using from math import sqrt removes the namespace prefix, which can cause name conflicts if another function named sqrt exists in the program. It also reduces code clarity because it is no longer obvious where the function comes from.
 
 **Question 2.2:** The standard library is always available — it requires no
 installation. Name two other standard library modules (not `math`) and
 describe in one sentence what each one is used for.
 
-> *Your answer:*
+> *Your answer:*    Two standard library modules are:
 
----
+os: provides functions to interact with the operating system (files, processes, environment variables).
+datetime: used for working with dates and times, including formatting and arithmetic.
+
+---   
 
 ## 3 – A Python Script File
 
@@ -254,13 +257,13 @@ it only under `if __name__ == "__main__"`. What is `__name__` set to when the
 file is run directly? What is it set to when the file is *imported* by another
 module — and why does this distinction matter?
 
-> *Your answer:*
+> *Your answer:*     When a file is run directly, __name__ is set to "__main__". When imported as a module, __name__ is set to the module’s name. This distinction prevents code from executing automatically on import, allowing reuse of functions without running the script logic.
 
 **Question 3.2:** The `kreisflaeche` function could be defined without
 importing `math` by hard-coding `3.14159` instead of `math.pi`. Give one
 concrete reason why using `math.pi` is preferable.
 
-> *Your answer:*
+> *Your answer:*    Using math.pi is preferable because it is more accurate, readable, and consistent across different systems. Hard-coding 3.14159 may introduce precision errors and reduces maintainability.
 
 ---
 
@@ -516,13 +519,13 @@ git push
 `uv.lock` be committed to version control while generated files like `.venv/`
 should not?
 
-> *Your answer:*
+> *Your answer:*   pyproject.toml defines the project’s dependencies and configuration, while uv.lock locks exact dependency versions to ensure reproducible environments. uv.lock should be committed because it guarantees identical environments across machines, whereas .venv/ is system-specific and should not be committed. 
 
 **Question 4.2:** `uv run python3 berechnung.py` uses the virtual
 environment's Python. What would happen if you ran `python3 berechnung.py`
 directly (without `uv run`) and `rich` is not installed system-wide?
 
-> *Your answer:*
+> *Your answer:*   If rich is not installed and the script is run without uv run, Python will raise a ModuleNotFoundError. The virtual environment ensures dependencies are available in an isolated and reproducible setup.
 
 ---
 
@@ -656,20 +659,20 @@ git push
 query. What is the role of a cursor in the database connection model?
 Why is one connection able to hold multiple cursors simultaneously?
 
-> *Your answer:*
+> *Your answer:*   A cursor acts as a control structure that allows execution of SQL queries and retrieval of results from a database connection. A single connection can manage multiple cursors because each cursor represents an independent query context within the same session.
 
 **Question 5.2:** The connection parameters (username, password, host) are
 written directly in the script as `DB_CONFIG`. Why is this a security problem
 in a real project? Name one common alternative for storing credentials outside
 the source code.
 
-> *Your answer:*
+> *Your answer:*    Storing credentials in source code is insecure because it exposes sensitive information and can lead to unauthorized database access if the code is shared or leaked. A common alternative is using environment variables or a separate configuration file outside version control.
 
 **Question 5.3:** `cursor.fetchall()` returns a list of tuples. The script
 accesses `row[0]`, `row[1]`, etc. by index. What is the risk of this approach,
 and which `psycopg2` cursor subclass would return named columns instead?
 
-> *Your answer:*
+> *Your answer:*  Accessing query results by index is risky because it depends on column order, which can change and break the code silently. A safer approach is using psycopg2.extras.RealDictCursor, which returns rows as dictionaries with named columns.
 
 ---
 
@@ -783,12 +786,12 @@ git push
 automatically. What standard does it use to describe the API, and what
 advantage does machine-readable API documentation have over a PDF?
 
-> *Your answer:*
+> *Your answer:*   FastAPI uses the OpenAPI standard to describe APIs. Machine-readable documentation allows automatic generation of interactive docs, client SDKs, and easier integration compared to static PDF documentation.
 
 **Question 6.2:** The `--reload` flag is useful during development but should
 not be used in production. Why?
 
-> *Your answer:*
+> *Your answer:*   The --reload flag should not be used in production because it continuously watches file changes and restarts the server, which reduces performance and may introduce instability or security risks.
 
 ---
 
@@ -967,20 +970,23 @@ git push
 What would be the security risk of building the SQL string by concatenation
 (`"VALUES ('" + mitglied.nachname + "'...)`)? Name the attack this prevents.
 
-> *Your answer:*
+> *Your answer:*    Building SQL queries through string concatenation can lead to SQL injection attacks, where an attacker manipulates input to execute malicious SQL commands. Parameterized queries prevent this by separating SQL logic from user input.
 
 **Question 7.2:** The `RealDictCursor` in endpoints 1 and 2 returns each row
 as a dictionary instead of a tuple. Why does this make the API response more
 useful to a client that receives the JSON output?
 
-> *Your answer:*
+> *Your answer:*   RealDictCursor returns rows as dictionaries with column names, making JSON responses more readable and self-describing. This improves usability for clients because data fields are explicitly named instead of accessed by index.
 
 **Question 7.3:** A caller of `GET /ausleihen/offen` receives a list of open
 loans without knowing anything about the underlying table structure, join logic,
 or database credentials. Name two concrete advantages this abstraction provides
 compared to giving every caller direct database access.
 
-> *Your answer:*
+> *Your answer:*   Two advantages:
+
+It hides internal database structure and protects sensitive schema details.
+It reduces complexity for clients by providing a simple API interface instead of direct SQL access.
 
 ---
 
@@ -992,7 +998,7 @@ can call `/ausleihen/offen` without knowing SQL. What is the general software
 engineering principle behind this, and where else in a typical application
 stack does the same principle appear?
 
-> *Your answer:*
+> *Your answer:*   This follows the principle of separation of concerns. It appears in layered architectures such as frontend (UI), backend (API/business logic), and database layers, where each layer handles a specific responsibility.
 
 **Question B – Stateless HTTP vs. database connections:**  
 Each of the three endpoints opens a new database connection and closes it after
@@ -1000,7 +1006,7 @@ the query. In a production system with hundreds of simultaneous requests this
 would be inefficient. What is the standard solution, and which Python library
 provides it for `psycopg2`?
 
-> *Your answer:*
+> *Your answer:*    The standard solution is connection pooling, which reuses existing database connections instead of opening a new one for every request. In Python, this can be implemented using psycopg2.pool.
 
 **Question C – Authentication:**  
 The API currently has no access control — anyone who can reach the server on
@@ -1009,7 +1015,7 @@ to a FastAPI application are **JWT tokens** (stateless, validated by the API
 itself) and **Keycloak** (external identity provider, acting as middleware).
 What is the main operational difference between the two approaches?
 
-> *Your answer:*
+> *Your answer:*   JWT is a stateless authentication method where the API validates tokens itself. Keycloak is an external identity provider that manages authentication centrally and provides tokens to the API.
 
 **Question D – The abstraction chain:**  
 You have now built a complete chain: raw data in PostgreSQL → SQL query in
@@ -1017,7 +1023,7 @@ Python → JSON response from FastAPI → curl client. Describe in two sentences
 what each link in this chain contributes and why removing any one of them
 would make the system harder to use or maintain.
 
-> *Your answer:*
+> *Your answer:*   PostgreSQL stores and manages the raw data, Python executes SQL queries and processes results, and FastAPI exposes the data through HTTP endpoints as JSON. Removing any layer would make the system less modular, harder to maintain, and less accessible to different clients.
 
 ---
 
